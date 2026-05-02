@@ -1,0 +1,123 @@
+{
+  "project_context": {
+    "domain": "Logistics & Moving Company",
+    "brand_name": "ВАШ ПЕРЕЇЗД",
+    "target_audience": "Families and businesses in Poltava, Ukraine seeking reliable, premium moving services.",
+    "key_values": "Trust, speed, careful handling, premium service, zero stress.",
+    "language": "uk"
+  },
+  "theme_and_archetype": {
+    "theme": "light",
+    "archetype": "Archetype 4 (Swiss & High-Contrast) + Premium Logistics Twist",
+    "reasoning": "A light theme evokes transparency and trust, essential for residential moving. High-contrast Swiss layout brings authority and clarity. We are swapping the traditional tech colors for a 'Navy & Amber' palette to maintain the original site's orange brand recognition but elevating it to a premium level."
+  },
+  "color_palette": {
+    "base": {
+      "background": "#F8F9FA",
+      "surface": "#FFFFFF",
+      "foreground": "#0B1120"
+    },
+    "brand": {
+      "primary": "#0F172A",
+      "primary_foreground": "#FFFFFF",
+      "accent": "#EA580C",
+      "accent_hover": "#C2410C",
+      "accent_foreground": "#FFFFFF"
+    },
+    "utility": {
+      "border": "#E2E8F0",
+      "muted": "#F1F5F9",
+      "muted_foreground": "#64748B"
+    },
+    "rules": [
+      "Use #EA580C (Amber/Orange) STRICTLY for CTAs (Call Now, Request Callback). It must be the most visible element.",
+      "Never use generic flat gray for backgrounds. Use tinted greys (slate).",
+      "Avoid #000000. Use deep navy/slate (#0B1120) for primary text."
+    ]
+  },
+  "typography": {
+    "heading_font": "Unbounded",
+    "body_font": "Manrope",
+    "rules": [
+      "Both fonts MUST support Cyrillic characters perfectly.",
+      "Headings (Unbounded): Use tracking-tight for titles to give a premium, solid 'cargo' feel.",
+      "Do NOT use Inter for headings.",
+      "H1 size max text-5xl md:text-6xl. Use fluid scaling."
+    ]
+  },
+  "spacing_and_layout": {
+    "strategy": "Generous Spacing + 'Control Room' Grid for Services",
+    "container_padding": "px-4 md:px-8 lg:px-12",
+    "section_spacing": "py-20 lg:py-32",
+    "card_style": "Sharp edges or minimal border-radius (rounded-sm). 1px solid border (#E2E8F0). No heavy drop shadows. Rely on crisp borders.",
+    "grid_patterns": [
+      "Services Section: 8-bento grid (grid-cols-1 md:grid-cols-2 lg:grid-cols-4).",
+      "Fleet Section: 3-column comparative layout for Mini, Standard, Maxi trucks."
+    ]
+  },
+  "components": {
+    "navigation": {
+      "style": "Crystal Glassmorphism (backdrop-blur-xl bg-white/80 border-b border-slate-200). Sticky top.",
+      "items": ["Послуги", "Автопарк", "Про нас", "Галерея", "Відгуки", "FAQ", "Блог", "Контакти"],
+      "cta": "Зателефонувати (Amber Button)"
+    },
+    "mobile_sticky_cta": {
+      "description": "CRITICAL: Fixed button at the bottom of the viewport on mobile devices ('Замовити дзвінок' / 'Зателефонувати') to drive Google Ads conversions.",
+      "classes": "fixed bottom-4 left-4 right-4 z-50 bg-orange-600 text-white shadow-lg rounded-full py-4 text-center font-bold"
+    },
+    "forms": {
+      "strategy": "Lead-gen focus. Minimal fields (Name, Phone).",
+      "integration": "Send to Telegram API (implement mock fallback `console.log('Sending to Telegram...')` if no API key is present).",
+      "pricing_rule": "DO NOT SHOW EXACT PRICES. The copy should emphasize 'Отримайте індивідуальний прорахунок' (Get a custom quote)."
+    },
+    "animations": {
+      "library": "framer-motion",
+      "patterns": [
+        "Fade up with stagger for service cards and fleet items.",
+        "Smooth scroll between sections using `lenis` if applicable.",
+        "Micro-interactions: Buttons translate-y-[-2px] on hover."
+      ]
+    }
+  },
+  "pages_structure": {
+    "home": ["Hero (Strong CTA)", "Trust Indicators", "Services Grid (8 items)", "Fleet (3 trucks)", "About Us", "Gallery", "Reviews", "FAQ", "Blog Preview", "Contact/Telegram Form"],
+    "services": [
+      { "url": "/services/kvartyrni-pereizdy", "title": "Квартирні переїзди" },
+      { "url": "/services/ofisni-pereizdy", "title": "Офісні переїзди" },
+      { "url": "/services/poslugy-vantazhnykiv", "title": "Послуги вантажників" },
+      { "url": "/services/pereizd-v-inshe-misto", "title": "Переїзд в інше місто" },
+      { "url": "/services/vyviz-smittia", "title": "Вивіз та утилізація сміття" },
+      { "url": "/services/dostavka-mebliv", "title": "Доставка меблів із магазинів" },
+      { "url": "/services/perevezennya-seyfiv", "title": "Перевезення роялів та сейфів" },
+      { "url": "/services/pakuvannya", "title": "Пакування / збирання / розбирання" }
+    ]
+  },
+  "media": {
+    "image_urls": {
+      "hero_background": {
+        "url": "https://images.unsplash.com/photo-1628481103102-01de5ffe556b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDJ8MHwxfHNlYXJjaHw0fHxtb3ZpbmclMjB0cnVja3xlbnwwfHx8fDE3Nzc3NjAwMzV8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Moving truck parked. Apply a gradient overlay (bg-gradient-to-r from-slate-900/90 to-slate-900/40) so the white/orange text pops perfectly."
+      },
+      "movers_action": {
+        "url": "https://images.pexels.com/photos/7464244/pexels-photo-7464244.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Professional movers carrying boxes. Use in About Us or Services section."
+      },
+      "packaging_materials": {
+        "url": "https://images.pexels.com/photos/8066709/pexels-photo-8066709.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Cardboard boxes representing packaging services."
+      }
+    },
+    "icons": {
+      "library": "lucide-react",
+      "instructions": "Use lucide-react for all service icons (e.g., Truck, Package, Home, Building, Trash2, Sofa, Piano/Music, Wrench)."
+    }
+  },
+  "instructions_to_main_agent": [
+    "Ensure the entire website copy is strictly in Ukrainian.",
+    "Use react-router-dom to create actual separate routes for the 8 services.",
+    "Add 'data-testid' to all buttons, links, and forms for testing purposes.",
+    "Prioritize mobile performance. Ensure the sticky CTA doesn't cover footer links.",
+    "Do not use generic 'card' wrappers for everything; use CSS grid with crisp borders for the Swiss look.",
+    "Form submission should have a mock Telegram API integration using console.log or a mock promise."
+  ]
+}
