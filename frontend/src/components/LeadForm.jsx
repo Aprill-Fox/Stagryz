@@ -46,14 +46,14 @@ export default function LeadForm({ defaultService = "", source = "", variant = "
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
         data-testid="lead-form-success"
-        className={`p-8 rounded-sm border ${dark ? "bg-slate-800 border-slate-700 text-white" : "bg-white border-slate-200"}`}
+        className={`p-8 rounded-sm border ${dark ? "bg-foreground/5 border-foreground/15 text-background" : "bg-card border-border text-foreground"}`}
       >
         <h3 className="font-display text-2xl font-bold mb-2">Заявку прийнято</h3>
-        <p className={dark ? "text-slate-300" : "text-slate-600"}>
+        <p className="opacity-80">
           Менеджер передзвонить протягом 10 хвилин у робочий час.
           Якщо терміново — телефонуйте напряму:
         </p>
-        <a href={SITE.phoneHref} className="inline-flex items-center gap-2 mt-4 text-orange-500 hover:text-orange-600 font-bold">
+        <a href={SITE.phoneHref} className="inline-flex items-center gap-2 mt-4 text-accent hover:opacity-80 font-bold">
           <Phone className="w-4 h-4" /> {SITE.phone}
         </a>
       </motion.div>
@@ -62,42 +62,28 @@ export default function LeadForm({ defaultService = "", source = "", variant = "
 
   const inputCls = `w-full px-4 py-3 rounded-sm border outline-none transition-colors ${
     dark
-      ? "bg-slate-800 border-slate-700 text-white placeholder:text-slate-500 focus:border-orange-500"
-      : "bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 focus:border-orange-500"
+      ? "bg-foreground/5 border-foreground/20 text-background placeholder:text-background/50 focus:border-accent"
+      : "bg-card border-border text-foreground placeholder:text-muted-foreground focus:border-accent"
   }`;
 
   return (
     <form onSubmit={submit} data-testid="lead-form" className="grid gap-3">
-      <input
-        type="text" required value={name} onChange={(e) => setName(e.target.value)}
-        placeholder="Ваше імʼя"
-        data-testid="lead-name-input"
-        className={inputCls}
-      />
-      <input
-        type="tel" required value={phone} onChange={(e) => setPhone(e.target.value)}
-        placeholder="+380 ___ ___ __ __"
-        data-testid="lead-phone-input"
-        className={inputCls}
-      />
-      <textarea
-        rows={3} value={message} onChange={(e) => setMessage(e.target.value)}
-        placeholder="Коротко про задачу (необовʼязково)"
-        data-testid="lead-message-input"
-        className={inputCls + " resize-none"}
-      />
+      <input type="text" required value={name} onChange={(e) => setName(e.target.value)}
+        placeholder="Ваше імʼя" data-testid="lead-name-input" className={inputCls} />
+      <input type="tel" required value={phone} onChange={(e) => setPhone(e.target.value)}
+        placeholder="+380 ___ ___ __ __" data-testid="lead-phone-input" className={inputCls} />
+      <textarea rows={3} value={message} onChange={(e) => setMessage(e.target.value)}
+        placeholder="Коротко про задачу (необовʼязково)" data-testid="lead-message-input"
+        className={inputCls + " resize-none"} />
       {defaultService && (
         <input type="hidden" value={defaultService} readOnly data-testid="lead-service-hidden" />
       )}
-      <button
-        type="submit" disabled={loading}
-        data-testid="lead-submit-btn"
-        className="inline-flex items-center justify-center gap-2 bg-orange-600 hover:bg-orange-700 disabled:opacity-60 text-white px-6 py-3.5 rounded-sm font-semibold transition-all hover:-translate-y-0.5"
-      >
+      <button type="submit" disabled={loading} data-testid="lead-submit-btn"
+        className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 disabled:opacity-60 text-accent-foreground px-6 py-3.5 rounded-sm font-semibold transition-all hover:-translate-y-0.5">
         <Send className="w-4 h-4" />
         {loading ? "Надсилаємо…" : "Замовити дзвінок"}
       </button>
-      <p className={`text-xs ${dark ? "text-slate-400" : "text-slate-500"}`}>
+      <p className={`text-xs ${dark ? "opacity-60" : "text-muted-foreground"}`}>
         Натискаючи кнопку, ви погоджуєтесь з обробкою персональних даних. Менеджер зателефонує протягом 10 хвилин.
       </p>
     </form>

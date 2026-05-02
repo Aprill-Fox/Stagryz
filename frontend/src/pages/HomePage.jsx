@@ -1,23 +1,34 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, Phone, Truck, Clock, ShieldCheck, Star } from "lucide-react";
+import { ArrowRight, Phone, Truck, Clock, ShieldCheck, Star, Sparkles } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import MobileStickyCTA from "../components/MobileStickyCTA";
+import FloatingContact from "../components/FloatingContact";
 import LeadForm from "../components/LeadForm";
+import KineticText from "../components/KineticText";
+import MagneticButton from "../components/MagneticButton";
 import { FadeIn, StaggerGrid, StaggerItem, Section, Eyebrow } from "../components/Motion";
-import { SERVICES, FLEET, REVIEWS, FAQS, POSTS, GALLERY, SITE } from "../lib/site-data";
+import { SERVICES, FLEET, REVIEWS, FAQS, POSTS, GALLERY, SITE, TRUST_TAGS } from "../lib/site-data";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../components/ui/accordion";
+import { useSeo, localBusinessSchema, faqPageSchema } from "../lib/seo";
 
 export default function HomePage() {
+  useSeo({
+    title: "Вантажні перевезення в Полтаві — переїзди 24/7",
+    description: "ВАШ ПЕРЕЇЗД — професійні вантажні перевезення в Полтаві: квартирні та офісні переїзди, послуги вантажників, міжмісто, перевезення піаніно. Цілодобово.",
+    path: "/",
+    schema: [localBusinessSchema, faqPageSchema(FAQS.slice(0, 6))],
+  });
+
   return (
     <>
       <Header />
       <main className="pt-16 md:pt-20">
         {/* Hero */}
-        <section className="relative overflow-hidden bg-slate-900 text-white">
+        <section className="relative overflow-hidden bg-foreground text-background">
           <div
-            className="absolute inset-0 bg-cover bg-center opacity-50"
+            className="absolute inset-0 bg-cover bg-center opacity-55"
             style={{ backgroundImage: "url(https://images.unsplash.com/photo-1628481103102-01de5ffe556b?auto=format&fit=crop&w=1900&q=80)" }}
           />
           <div className="absolute inset-0 hero-overlay" />
@@ -26,44 +37,41 @@ export default function HomePage() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="inline-flex items-center gap-2 mb-6 text-xs uppercase tracking-[0.25em] text-orange-400 font-semibold"
+                className="inline-flex items-center gap-2 mb-6 text-xs uppercase tracking-[0.25em] text-accent font-semibold"
               >
-                <span className="w-10 h-px bg-orange-500" />
+                <Sparkles className="w-3.5 h-3.5" />
                 {SITE.city} · 5+ років · цілодобово
               </motion.div>
-              <motion.h1
-                initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.05 }}
-                className="font-display font-extrabold text-4xl sm:text-5xl lg:text-7xl tracking-tight text-balance leading-[1.05]"
-              >
-                Переїзд — <br />
-                <span className="text-orange-500">це просто.</span>
-              </motion.h1>
+              <h1 className="font-display font-extrabold text-5xl sm:text-6xl lg:text-[5.5rem] tracking-tight leading-[0.95]">
+                <KineticText text="Переїзд" />
+                <span className="font-serif italic text-accent ml-2">— це</span><br />
+                <KineticText text="просто." delay={0.2} />
+              </h1>
               <motion.p
-                initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.15 }}
-                className="mt-6 text-lg md:text-xl text-slate-200 max-w-xl"
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.5 }}
+                className="mt-7 text-lg md:text-xl opacity-85 max-w-xl"
               >
                 Безпечне і дбайливе перевезення вантажів по Полтаві, області та всій Україні. Команда, авто, пакування та страхування — все вже включено.
               </motion.p>
 
               <motion.div
-                initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.25 }}
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.7 }}
                 className="mt-10 flex flex-wrap gap-3"
               >
-                <a href={SITE.phoneHref} data-testid="hero-call-btn"
-                   className="inline-flex items-center gap-3 bg-orange-600 hover:bg-orange-700 px-7 py-4 rounded-sm font-bold text-base transition-all hover:-translate-y-0.5">
+                <MagneticButton as="a" href={SITE.phoneHref} data-testid="hero-call-btn"
+                  className="inline-flex items-center gap-3 bg-accent hover:bg-accent/90 text-accent-foreground px-7 py-4 rounded-sm font-bold text-base transition-colors">
                   <Phone className="w-5 h-5" /> {SITE.phone}
-                </a>
+                </MagneticButton>
                 <Link to="/services" data-testid="hero-services-btn"
-                   className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur border border-white/20 px-7 py-4 rounded-sm font-semibold transition-all">
+                  className="inline-flex items-center gap-2 bg-background/10 hover:bg-background/20 backdrop-blur border border-background/20 px-7 py-4 rounded-sm font-semibold transition-all">
                   Дізнатись більше <ArrowRight className="w-4 h-4" />
                 </Link>
               </motion.div>
 
               <motion.div
-                initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }}
                 className="mt-14 grid grid-cols-3 gap-4 md:gap-8 max-w-xl"
               >
                 {[
@@ -72,8 +80,8 @@ export default function HomePage() {
                   { v: "5+ років", l: "Досвід команди" },
                 ].map((s) => (
                   <div key={s.l}>
-                    <div className="font-display text-2xl md:text-3xl font-bold text-orange-500">{s.v}</div>
-                    <div className="text-xs md:text-sm text-slate-300 uppercase tracking-wider mt-1">{s.l}</div>
+                    <div className="font-display text-2xl md:text-3xl font-bold text-accent">{s.v}</div>
+                    <div className="text-xs md:text-sm opacity-70 uppercase tracking-wider mt-1">{s.l}</div>
                   </div>
                 ))}
               </motion.div>
@@ -82,13 +90,10 @@ export default function HomePage() {
         </section>
 
         {/* Trust strip */}
-        <div className="border-y border-slate-200 bg-white py-5 overflow-hidden">
-          <div className="flex animate-marquee whitespace-nowrap gap-12 text-slate-500 text-sm font-medium">
-            {[...Array(2)].flatMap((_, i) => [
-              "Страхування вантажу", "Цілодобово 24/7", "Власний автопарк", "Досвідчені вантажники",
-              "Прозоре ціноутворення", "Без передоплат", "Робота по Україні", "Договір з юр.особами",
-            ].map((t, j) => (
-              <span key={`${i}-${j}`} className="inline-flex items-center gap-2"><span className="w-1.5 h-1.5 bg-orange-500 rounded-full" />{t}</span>
+        <div className="border-y border-border bg-surface py-5 overflow-hidden">
+          <div className="flex animate-marquee whitespace-nowrap gap-12 text-muted-foreground text-sm font-medium">
+            {[...Array(2)].flatMap((_, i) => TRUST_TAGS.map((t, j) => (
+              <span key={`${i}-${j}`} className="inline-flex items-center gap-2"><span className="w-1.5 h-1.5 bg-accent rounded-full" />{t}</span>
             )))}
           </div>
         </div>
@@ -98,18 +103,18 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <FadeIn>
               <Eyebrow>Послуги</Eyebrow>
-              <h2 className="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight">
-                Що ми робимо
+              <h2 className="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight text-foreground">
+                Що ми робимо у <span className="font-serif italic text-accent">Полтаві</span>
               </h2>
             </FadeIn>
             <FadeIn delay={0.1}>
-              <p className="max-w-md text-slate-600">
+              <p className="max-w-md text-muted-foreground">
                 Восьмеро основних напрямків. Натисніть на будь-яку послугу — побачите деталі, що включено, як працюємо.
               </p>
             </FadeIn>
           </div>
 
-          <StaggerGrid className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-slate-200 border border-slate-200">
+          <StaggerGrid className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border border border-border">
             {SERVICES.map((s) => {
               const Icon = s.icon;
               return (
@@ -117,14 +122,14 @@ export default function HomePage() {
                   <Link
                     to={`/services/${s.slug}`}
                     data-testid={`service-card-${s.slug}`}
-                    className="group block bg-white p-7 h-full hover:bg-slate-900 hover:text-white transition-colors duration-300"
+                    className="group block bg-card p-7 h-full hover:bg-foreground hover:text-background transition-colors duration-300"
                   >
-                    <div className="w-12 h-12 grid place-items-center bg-slate-100 group-hover:bg-orange-600 rounded-sm mb-5 transition-colors">
-                      <Icon className="w-6 h-6 text-slate-900 group-hover:text-white transition-colors" />
+                    <div className="w-12 h-12 grid place-items-center bg-muted group-hover:bg-accent rounded-sm mb-5 transition-colors">
+                      <Icon className="w-6 h-6 text-foreground group-hover:text-accent-foreground transition-colors" />
                     </div>
                     <h3 className="font-display font-bold text-lg leading-tight tracking-tight">{s.title}</h3>
-                    <p className="mt-2 text-sm text-slate-600 group-hover:text-slate-300 leading-relaxed">{s.short}</p>
-                    <div className="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold text-orange-600 group-hover:text-orange-400">
+                    <p className="mt-2 text-sm opacity-75 leading-relaxed">{s.short}</p>
+                    <div className="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold text-accent">
                       Детальніше <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
                     </div>
                   </Link>
@@ -134,15 +139,39 @@ export default function HomePage() {
           </StaggerGrid>
         </Section>
 
+        {/* Process */}
+        <Section className="bg-surface border-y border-border">
+          <FadeIn>
+            <Eyebrow>Як ми працюємо</Eyebrow>
+            <h2 className="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight mb-10 text-foreground">Чотири кроки до спокійного переїзду</h2>
+          </FadeIn>
+          <StaggerGrid className="grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-border border border-border">
+            {[
+              { n: "01", t: "Заявка", d: "Ви телефонуєте або залишаєте заявку. Розповідаєте про задачу — ми слухаємо, а не продаємо." },
+              { n: "02", t: "Прорахунок", d: "Ми називаємо чесну вартість, узгоджуємо час, авто і кількість людей. Жодних прихованих доплат." },
+              { n: "03", t: "Виконання", d: "Команда приїжджає вчасно, із пакувальними матеріалами та інструментами. Ви можете спокійно займатись своїми справами." },
+              { n: "04", t: "Передача", d: "Все на новому місці, ви перевіряєте, ми отримуємо оплату. Жодних додаткових запитів після." },
+            ].map((s) => (
+              <StaggerItem key={s.n}>
+                <div className="bg-card p-7 h-full">
+                  <div className="font-display text-3xl font-bold text-accent mb-3">{s.n}</div>
+                  <h3 className="font-display font-bold text-lg mb-2 text-foreground">{s.t}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{s.d}</p>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerGrid>
+        </Section>
+
         {/* Fleet */}
-        <Section className="bg-white border-t border-slate-200">
+        <Section>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <FadeIn>
               <Eyebrow>Автопарк</Eyebrow>
-              <h2 className="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight">Свої авто, готові до роботи</h2>
+              <h2 className="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight text-foreground">Свої авто, готові до роботи</h2>
             </FadeIn>
             <FadeIn delay={0.1}>
-              <Link to="/fleet" className="inline-flex items-center gap-2 text-sm font-semibold text-orange-600 hover:text-orange-700">
+              <Link to="/fleet" className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:opacity-80 link-underline">
                 Усі моделі <ArrowRight className="w-4 h-4" />
               </Link>
             </FadeIn>
@@ -150,16 +179,16 @@ export default function HomePage() {
           <StaggerGrid className="grid md:grid-cols-3 gap-6">
             {FLEET.map((c) => (
               <StaggerItem key={c.slug}>
-                <div data-testid={`fleet-${c.slug}`} className="border border-slate-200 bg-slate-50 p-6 h-full hover:border-slate-900 transition-colors">
-                  <img src={c.img} alt={c.name} className="w-full h-32 object-contain mb-4" />
-                  <h3 className="font-display text-2xl font-bold tracking-tight">{c.name}</h3>
+                <div data-testid={`fleet-${c.slug}`} className="border border-border bg-surface p-6 h-full hover:border-foreground transition-colors">
+                  <img src={c.img} alt={`Фургон ${c.name} — ${c.volume}, ${c.capacity}`} className="w-full h-32 object-contain mb-4" />
+                  <h3 className="font-display text-2xl font-bold tracking-tight text-foreground">{c.name}</h3>
                   <div className="mt-3 grid grid-cols-2 gap-2 text-sm">
-                    <div><span className="text-slate-500">Довжина: </span>{c.length}</div>
-                    <div><span className="text-slate-500">Висота: </span>{c.height}</div>
-                    <div><span className="text-slate-500">Ширина: </span>{c.width}</div>
-                    <div><span className="text-slate-500">Обʼєм: </span>{c.volume}</div>
+                    <div><span className="text-muted-foreground">Довжина: </span>{c.length}</div>
+                    <div><span className="text-muted-foreground">Висота: </span>{c.height}</div>
+                    <div><span className="text-muted-foreground">Ширина: </span>{c.width}</div>
+                    <div><span className="text-muted-foreground">Обʼєм: </span>{c.volume}</div>
                   </div>
-                  <div className="mt-4 pt-4 border-t border-slate-200 text-xs text-slate-500">{c.best}</div>
+                  <div className="mt-4 pt-4 border-t border-border text-xs text-muted-foreground">{c.best}</div>
                 </div>
               </StaggerItem>
             ))}
@@ -167,15 +196,15 @@ export default function HomePage() {
         </Section>
 
         {/* Why us */}
-        <Section className="bg-slate-50 border-y border-slate-200">
+        <Section className="bg-surface border-y border-border">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <FadeIn>
               <Eyebrow>Чому ми</Eyebrow>
-              <h2 className="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight mb-6">
-                Команда, що відповідає за результат
+              <h2 className="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight mb-6 text-foreground">
+                Команда, що <span className="font-serif italic text-accent">відповідає</span> за результат
               </h2>
-              <p className="text-slate-600 text-lg leading-relaxed">
-                Понад 5 років професійних перевезень. Ми — це не випадкові люди з оголошення, а команда, яка щодня працює разом. У нас власні авто, інструменти, пакувальні матеріали і чіткі стандарти.
+              <p className="text-muted-foreground text-lg leading-relaxed">
+                Понад 5 років професійних перевезень. Ми — це не випадкові люди з оголошення, а команда, яка щодня працює разом. Власні авто, інструменти, пакувальні матеріали і чіткі стандарти.
               </p>
               <div className="grid sm:grid-cols-2 gap-4 mt-8">
                 {[
@@ -187,12 +216,12 @@ export default function HomePage() {
                   const I = b.icon;
                   return (
                     <div key={b.t} className="flex gap-3">
-                      <div className="w-10 h-10 grid place-items-center bg-white border border-slate-200 rounded-sm shrink-0">
-                        <I className="w-5 h-5 text-orange-600" />
+                      <div className="w-10 h-10 grid place-items-center bg-card border border-border rounded-sm shrink-0">
+                        <I className="w-5 h-5 text-accent" />
                       </div>
                       <div>
-                        <div className="font-display font-bold text-slate-900">{b.t}</div>
-                        <div className="text-sm text-slate-600">{b.d}</div>
+                        <div className="font-display font-bold text-foreground">{b.t}</div>
+                        <div className="text-sm text-muted-foreground">{b.d}</div>
                       </div>
                     </div>
                   );
@@ -202,7 +231,9 @@ export default function HomePage() {
             <FadeIn delay={0.15}>
               <div className="grid grid-cols-2 gap-3">
                 {GALLERY.slice(0, 4).map((g, i) => (
-                  <img key={i} src={g} alt="" className={`w-full object-cover rounded-sm ${i === 0 ? "row-span-2 h-full" : "h-44"}`} />
+                  <div key={i} className={`img-zoom ${i === 0 ? "row-span-2" : ""}`}>
+                    <img src={g} alt="Робота команди ВАШ ПЕРЕЇЗД у Полтаві" className={`w-full object-cover rounded-sm ${i === 0 ? "h-full" : "h-44"}`} />
+                  </div>
                 ))}
               </div>
             </FadeIn>
@@ -214,51 +245,51 @@ export default function HomePage() {
           <div className="mb-12">
             <FadeIn>
               <Eyebrow>Відгуки</Eyebrow>
-              <h2 className="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight">Що про нас кажуть клієнти</h2>
+              <h2 className="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight text-foreground">Що про нас кажуть клієнти</h2>
             </FadeIn>
           </div>
           <StaggerGrid className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {REVIEWS.slice(0, 3).map((r, i) => (
               <StaggerItem key={i}>
-                <div className="border border-slate-200 bg-white p-6 h-full">
-                  <div className="flex gap-0.5 text-orange-500 mb-3">
+                <div className="border border-border bg-card p-6 h-full">
+                  <div className="flex gap-0.5 text-accent mb-3">
                     {[...Array(r.rating)].map((_, k) => <Star key={k} className="w-4 h-4 fill-current" />)}
                   </div>
-                  <p className="text-slate-700 leading-relaxed">«{r.text}»</p>
-                  <div className="mt-5 pt-4 border-t border-slate-100 flex justify-between items-center">
-                    <span className="font-semibold text-slate-900">{r.name}</span>
-                    <span className="text-xs text-slate-500">{r.service}</span>
+                  <p className="text-foreground/80 leading-relaxed">«{r.text}»</p>
+                  <div className="mt-5 pt-4 border-t border-border flex justify-between items-center">
+                    <span className="font-semibold text-foreground">{r.name}</span>
+                    <span className="text-xs text-muted-foreground">{r.service}</span>
                   </div>
                 </div>
               </StaggerItem>
             ))}
           </StaggerGrid>
           <div className="mt-8">
-            <Link to="/reviews" className="inline-flex items-center gap-2 text-sm font-semibold text-orange-600 hover:text-orange-700">
+            <Link to="/reviews" className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:opacity-80 link-underline">
               Усі відгуки <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </Section>
 
         {/* FAQ */}
-        <Section className="bg-slate-50 border-y border-slate-200">
+        <Section className="bg-surface border-y border-border">
           <div className="grid lg:grid-cols-3 gap-12">
             <FadeIn>
               <Eyebrow>Часті питання</Eyebrow>
-              <h2 className="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight">Відповіді на головне</h2>
-              <p className="mt-4 text-slate-600">Не знайшли відповіді? Просто зателефонуйте — швидше і простіше.</p>
-              <a href={SITE.phoneHref} className="inline-flex items-center gap-2 mt-6 text-orange-600 hover:text-orange-700 font-bold">
+              <h2 className="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight text-foreground">Відповіді на головне</h2>
+              <p className="mt-4 text-muted-foreground">Не знайшли відповіді? Просто зателефонуйте — швидше і простіше.</p>
+              <a href={SITE.phoneHref} className="inline-flex items-center gap-2 mt-6 text-accent hover:opacity-80 font-bold">
                 <Phone className="w-4 h-4" /> {SITE.phone}
               </a>
             </FadeIn>
             <FadeIn delay={0.1} className="lg:col-span-2">
-              <Accordion type="single" collapsible className="border-t border-slate-200">
-                {FAQS.slice(0, 5).map((f, i) => (
-                  <AccordionItem key={i} value={`item-${i}`} className="border-b border-slate-200" data-testid={`faq-${i}`}>
-                    <AccordionTrigger className="text-left font-display font-semibold text-base md:text-lg py-5 hover:text-orange-600">
+              <Accordion type="single" collapsible className="border-t border-border">
+                {FAQS.slice(0, 6).map((f, i) => (
+                  <AccordionItem key={i} value={`item-${i}`} className="border-b border-border" data-testid={`faq-${i}`}>
+                    <AccordionTrigger className="text-left font-display font-semibold text-base md:text-lg py-5 hover:text-accent">
                       {f.q}
                     </AccordionTrigger>
-                    <AccordionContent className="text-slate-600 leading-relaxed pb-5">
+                    <AccordionContent className="text-muted-foreground leading-relaxed pb-5">
                       {f.a}
                     </AccordionContent>
                   </AccordionItem>
@@ -273,10 +304,10 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <FadeIn>
               <Eyebrow>Блог</Eyebrow>
-              <h2 className="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight">Корисні статті про переїзди</h2>
+              <h2 className="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight text-foreground">Корисні статті про переїзди</h2>
             </FadeIn>
             <FadeIn delay={0.1}>
-              <Link to="/blog" className="inline-flex items-center gap-2 text-sm font-semibold text-orange-600 hover:text-orange-700">
+              <Link to="/blog" className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:opacity-80 link-underline">
                 Усі статті <ArrowRight className="w-4 h-4" />
               </Link>
             </FadeIn>
@@ -285,12 +316,12 @@ export default function HomePage() {
             {POSTS.slice(0, 3).map((p) => (
               <StaggerItem key={p.slug}>
                 <Link to={`/blog/${p.slug}`} className="group block">
-                  <div className="aspect-[16/10] overflow-hidden rounded-sm">
-                    <img src={p.cover} alt={p.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                  <div className="aspect-[16/10] img-zoom rounded-sm">
+                    <img src={p.cover} alt={p.title} className="w-full h-full object-cover" />
                   </div>
-                  <div className="text-xs text-slate-500 mt-4 uppercase tracking-wider">{new Date(p.date).toLocaleDateString("uk-UA", { year: "numeric", month: "long", day: "numeric" })}</div>
-                  <h3 className="font-display font-bold text-xl mt-2 leading-tight group-hover:text-orange-600 transition-colors">{p.title}</h3>
-                  <p className="mt-2 text-slate-600 text-sm">{p.excerpt}</p>
+                  <div className="text-xs text-muted-foreground mt-4 uppercase tracking-wider">{new Date(p.date).toLocaleDateString("uk-UA", { year: "numeric", month: "long", day: "numeric" })}</div>
+                  <h3 className="font-display font-bold text-xl mt-2 leading-tight text-foreground group-hover:text-accent transition-colors">{p.title}</h3>
+                  <p className="mt-2 text-muted-foreground text-sm">{p.excerpt}</p>
                 </Link>
               </StaggerItem>
             ))}
@@ -298,20 +329,20 @@ export default function HomePage() {
         </Section>
 
         {/* Lead form CTA */}
-        <Section className="bg-slate-900 text-white">
+        <Section className="bg-foreground text-background">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <FadeIn>
               <Eyebrow>Замовити</Eyebrow>
               <h2 className="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight mb-5">
-                Отримайте індивідуальний прорахунок
+                Отримайте <span className="font-serif italic text-accent">індивідуальний</span> прорахунок
               </h2>
-              <p className="text-slate-300 text-lg leading-relaxed">
+              <p className="opacity-80 text-lg leading-relaxed">
                 Залишайте заявку — менеджер зателефонує протягом 10 хвилин, уточнить деталі та запропонує оптимальне авто й команду.
               </p>
-              <div className="mt-8 grid gap-3 text-sm text-slate-300">
-                <div className="flex items-center gap-3"><span className="text-orange-500">✓</span> Безкоштовна консультація</div>
-                <div className="flex items-center gap-3"><span className="text-orange-500">✓</span> Чесна ціна після огляду</div>
-                <div className="flex items-center gap-3"><span className="text-orange-500">✓</span> Без прихованих платежів</div>
+              <div className="mt-8 grid gap-3 text-sm opacity-90">
+                <div className="flex items-center gap-3"><span className="text-accent">✓</span> Безкоштовна консультація</div>
+                <div className="flex items-center gap-3"><span className="text-accent">✓</span> Чесна ціна після огляду</div>
+                <div className="flex items-center gap-3"><span className="text-accent">✓</span> Без прихованих платежів</div>
               </div>
             </FadeIn>
             <FadeIn delay={0.1}>
@@ -322,6 +353,7 @@ export default function HomePage() {
       </main>
       <Footer />
       <MobileStickyCTA />
+      <FloatingContact />
     </>
   );
 }

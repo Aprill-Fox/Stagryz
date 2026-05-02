@@ -1,0 +1,35 @@
+{
+  "summary": "Post-refactor regression test for stagruz.pl.ua. Backend: 8/8 pytest passed (root, services list with 8 slugs, lead create/validation/persist/list-desc/no _id leakage, telegram_sent=false in mock). Frontend (22 checks): home loads with kinetic hero & updated document.title, theme-toggle visible and switches html.dark class (persisted in localStorage key 'theme'), marquee trust strip present, 8 service cards on home, all 8 service pages render with breadcrumbs (Головна > Послуги > <title>) and long SEO copy, lead form submits on both home and /services/kvartyrni-pereizdy and shows lead-form-success, all 8 nav pages (/services,/about,/fleet,/gallery,/reviews,/faq,/blog,/contacts) load 200, /blog/yak-pidgotuvatys-do-pereizdu loads, floating contact visible on desktop (opens on click exposing tel/telegram/viber links), floating hidden and mobile sticky CTA (data-testid=mobile-sticky-call) visible at 390px, sitemap.xml served with 21 URLs. JSON-LD present: home has MovingCompany (subtype of LocalBusiness per schema.org) + FAQPage; service pages have Service + BreadcrumbList + FAQPage. Backend was unchanged in this iteration as expected.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "HomePage hero background image", "issues": ["STILL UNRESOLVED from iteration 1: hero background clearly shows U-Haul branded American truck with English text ('Where Will U Go Next?', 'uhaul.com', 'Gentle-Ride Van', 'Right Equipment / Lowest Cost', 'U-HAUL Large Box'). Off-brand for a Ukrainian Poltava moving company. Replace with a locale-appropriate photo."]}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/backend_test.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "Replace hero background image (still U-Haul/English-branded) — carried over from iteration 1",
+    "Optional: robots.txt at https://service-showcase-110.preview.emergentagent.com/robots.txt is intercepted by preview-env ingress (returns Cloudflare Content-Signal default) instead of the app's /app/frontend/public/robots.txt. Will be correct on the real stagruz.pl.ua domain — preview-env artifact, no code change needed."
+  ],
+  "critical_code_review_comments": [
+    "Backend server.py is clean: uuid id, _id excluded on list_leads projection, env-driven Mongo/CORS, telegram mock returns False when token/chat empty. Unchanged from iteration 1.",
+    "ThemeProvider persists to localStorage key 'theme' (verified). Good. Consider namespacing to 'stagruz-theme' to avoid collisions if reused.",
+    "FloatingContact panel has data-testid on toggle but the open panel div has no data-testid — adding data-testid='floating-contact-panel' would make automation more robust.",
+    "useSeo hook correctly injects document.title/meta/JSON-LD per route and LocalBusiness is represented as @type=MovingCompany (valid schema.org subtype).",
+    "Sitemap.xml (21 URLs) and robots.txt live in /app/frontend/public — good CRA pattern.",
+    "LeadForm exposes full set of data-testids (lead-form, lead-name-input, lead-phone-input, lead-message-input, lead-submit-btn, lead-form-success) — excellent testability."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "test_credentials": "N/A — no auth in this app",
+  "seed_data_creation": "Created 2 TEST_-prefixed leads via frontend form submissions during testing (home + service page); harmless persistent data in leads collection",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Backend unchanged — backend_test.py at /app/backend/tests/backend_test.py still covers all 8 cases. Frontend data-testids: theme-toggle, floating-contact-toggle, mobile-sticky-call, lead-name-input, lead-phone-input, lead-submit-btn, lead-form-success, service-title. Theme localStorage key is 'theme'. Floating contact panel has NO data-testid — query via 'div.fixed.right-5 div.bg-card' or JS click the toggle (note: Emergent preview badge at bottom-right can overlap the floating button on desktop — use JS click or click offset). Hero U-Haul image is a standing design issue.",
+  "rca of the issue": "No new bugs found in this iteration. Refactor from hardcoded slate/orange to semantic tokens + added theme switching + per-page useSeo did not break any frontend or backend contract. The single outstanding design issue (U-Haul hero image) was identified in iteration 1 and remains unfixed."
+}
