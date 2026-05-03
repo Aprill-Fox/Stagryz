@@ -4,7 +4,7 @@ import { SITE, SERVICES } from "../lib/site-data";
 
 export default function Footer() {
   return (
-    <footer data-testid="site-footer" className="bg-foreground text-background mt-24">
+    <footer data-testid="site-footer" className="panel-ink mt-24">
       <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-16 grid gap-10 md:grid-cols-2 lg:grid-cols-4">
         <div>
           <Link to="/" className="flex items-center gap-2 mb-5">
@@ -56,7 +56,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-background/10">
+      <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-6 flex flex-col md:flex-row justify-between gap-3 text-xs opacity-60">
           <span>© {new Date().getFullYear()} {SITE.brand}. Всі права захищені.</span>
           <span>Створено з турботою про ваш переїзд.</span>

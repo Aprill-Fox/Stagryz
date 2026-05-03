@@ -186,7 +186,7 @@ export default function ServicePage() {
         </Section>
 
         {/* Lead form */}
-        <Section id="order" className="bg-foreground text-background">
+        <Section id="order" className="panel-ink">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <FadeIn>
               <Eyebrow>Замовити</Eyebrow>
@@ -194,7 +194,7 @@ export default function ServicePage() {
               <p className="mt-4 opacity-80 leading-relaxed">
                 Залишіть телефон — менеджер зателефонує протягом 10 хвилин, уточнить деталі і прорахує точну вартість.
               </p>
-              <div className="mt-8 inline-flex items-center gap-3 px-5 py-4 bg-background/10 border border-background/15">
+              <div className="mt-8 inline-flex items-center gap-3 px-5 py-4 bg-white/5 border border-white/15">
                 <Phone className="w-5 h-5 text-accent" />
                 <a href={SITE.phoneHref} className="font-bold text-lg">{SITE.phone}</a>
               </div>

@@ -60,7 +60,7 @@ export default function FleetPage() {
           </StaggerGrid>
         </Section>
 
-        <Section className="bg-foreground text-background">
+        <Section className="panel-ink">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <FadeIn>
               <Eyebrow>Замовити</Eyebrow>

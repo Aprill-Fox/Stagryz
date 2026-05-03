@@ -101,6 +101,57 @@ body {
 
 ::selection { background: hsl(var(--accent)); color: hsl(var(--accent-foreground)); }
 
+/* Theme-independent dark panel — always dark regardless of light/dark theme */
+.panel-ink {
+    background: hsl(220 27% 7%);
+    color: hsl(36 30% 94%);
+}
+.dark .panel-ink {
+    background: hsl(220 30% 4%);
+    color: hsl(36 30% 94%);
+}
+.panel-ink .panel-muted { color: hsl(36 30% 94% / 0.7); }
+.panel-ink-input {
+    background: hsl(36 30% 94% / 0.05);
+    border-color: hsl(36 30% 94% / 0.2);
+    color: hsl(36 30% 94%);
+}
+.panel-ink-input::placeholder { color: hsl(36 30% 94% / 0.45); }
+.panel-ink-input:focus { border-color: hsl(14 87% 60%); }
+
+/* Driving truck CSS animation — subtle line + moving icon */
+@keyframes drive {
+    0% { transform: translateX(-120px); }
+    100% { transform: translateX(calc(100vw + 120px)); }
+}
+.truck-line {
+    animation: drive 14s linear infinite;
+    will-change: transform;
+}
+
+/* 3D tilt helper */
+.tilt { transform-style: preserve-3d; perspective: 1000px; }
+
+/* Cursor follower dot */
+.cursor-dot {
+    position: fixed;
+    top: 0; left: 0;
+    width: 24px; height: 24px;
+    border-radius: 9999px;
+    background: hsl(var(--accent) / 0.35);
+    pointer-events: none;
+    mix-blend-mode: multiply;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, background 0.2s;
+    display: none;
+}
+@media (hover: hover) and (pointer: fine) {
+    .cursor-dot { display: block; }
+}
+.dark .cursor-dot { mix-blend-mode: screen; }
+.cursor-dot.cursor-lg { width: 60px; height: 60px; background: hsl(var(--accent) / 0.2); }
+
 /* Marquee */
 @keyframes marquee {
     0% { transform: translateX(0); }

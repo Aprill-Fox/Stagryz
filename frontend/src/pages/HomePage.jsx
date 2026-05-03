@@ -12,6 +12,9 @@ import { FadeIn, StaggerGrid, StaggerItem, Section, Eyebrow } from "../component
 import { SERVICES, FLEET, REVIEWS, FAQS, POSTS, GALLERY, SITE, TRUST_TAGS } from "../lib/site-data";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../components/ui/accordion";
 import { useSeo, localBusinessSchema, faqPageSchema } from "../lib/seo";
+import PoltavaLandmarks from "../components/PoltavaLandmarks";
+import GoogleReviewsSection from "../components/GoogleReviewsSection";
+import DrivingTruck from "../components/DrivingTruck";
 
 export default function HomePage() {
   useSeo({
@@ -26,7 +29,7 @@ export default function HomePage() {
       <Header />
       <main className="pt-16 md:pt-20">
         {/* Hero */}
-        <section className="relative overflow-hidden bg-foreground text-background">
+        <section className="relative overflow-hidden panel-ink">
           <div
             className="absolute inset-0 bg-cover bg-center opacity-55"
             style={{ backgroundImage: "url(https://images.unsplash.com/photo-1628481103102-01de5ffe556b?auto=format&fit=crop&w=1900&q=80)" }}
@@ -240,36 +243,16 @@ export default function HomePage() {
           </div>
         </Section>
 
-        {/* Reviews */}
-        <Section>
-          <div className="mb-12">
-            <FadeIn>
-              <Eyebrow>Відгуки</Eyebrow>
-              <h2 className="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight text-foreground">Що про нас кажуть клієнти</h2>
-            </FadeIn>
-          </div>
-          <StaggerGrid className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {REVIEWS.slice(0, 3).map((r, i) => (
-              <StaggerItem key={i}>
-                <div className="border border-border bg-card p-6 h-full">
-                  <div className="flex gap-0.5 text-accent mb-3">
-                    {[...Array(r.rating)].map((_, k) => <Star key={k} className="w-4 h-4 fill-current" />)}
-                  </div>
-                  <p className="text-foreground/80 leading-relaxed">«{r.text}»</p>
-                  <div className="mt-5 pt-4 border-t border-border flex justify-between items-center">
-                    <span className="font-semibold text-foreground">{r.name}</span>
-                    <span className="text-xs text-muted-foreground">{r.service}</span>
-                  </div>
-                </div>
-              </StaggerItem>
-            ))}
-          </StaggerGrid>
-          <div className="mt-8">
-            <Link to="/reviews" className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:opacity-80 link-underline">
-              Усі відгуки <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </Section>
+        {/* Reviews — Google styled */}
+        <GoogleReviewsSection />
+
+        {/* Poltava landmarks */}
+        <PoltavaLandmarks />
+
+        {/* Driving truck separator */}
+        <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+          <DrivingTruck className="my-4" />
+        </div>
 
         {/* FAQ */}
         <Section className="bg-surface border-y border-border">
@@ -329,7 +312,7 @@ export default function HomePage() {
         </Section>
 
         {/* Lead form CTA */}
-        <Section className="bg-foreground text-background">
+        <Section className="panel-ink">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <FadeIn>
               <Eyebrow>Замовити</Eyebrow>

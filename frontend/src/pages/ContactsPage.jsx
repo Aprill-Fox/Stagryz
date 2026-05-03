@@ -79,7 +79,7 @@ export default function ContactsPage() {
             </FadeIn>
 
             <FadeIn delay={0.1}>
-              <div className="bg-foreground text-background p-8">
+              <div className="panel-ink p-8">
                 <h2 className="font-display text-2xl font-bold mb-2">Залишити заявку</h2>
                 <p className="opacity-80 text-sm mb-6">Менеджер передзвонить протягом 10 хвилин.</p>
                 <LeadForm variant="dark" source="/contacts" />

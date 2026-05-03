@@ -15,6 +15,7 @@ import BlogPostPage from "./pages/BlogPostPage";
 import ContactsPage from "./pages/ContactsPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ScrollToTop from "./components/ScrollToTop";
+import CursorFollower from "./components/CursorFollower";
 import { ThemeProvider } from "./lib/theme";
 
 function PageWrap({ children }) {
@@ -58,6 +59,7 @@ function App() {
       <div className="App">
         <BrowserRouter>
           <ScrollToTop />
+          <CursorFollower />
           <AppRoutes />
           <Toaster position="top-center" richColors closeButton />
         </BrowserRouter>

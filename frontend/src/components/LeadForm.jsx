@@ -46,7 +46,7 @@ export default function LeadForm({ defaultService = "", source = "", variant = "
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
         data-testid="lead-form-success"
-        className={`p-8 rounded-sm border ${dark ? "bg-foreground/5 border-foreground/15 text-background" : "bg-card border-border text-foreground"}`}
+        className={`p-8 rounded-sm border ${dark ? "bg-white/5 border-white/15 text-[#F0EBDF]" : "bg-card border-border text-foreground"}`}
       >
         <h3 className="font-display text-2xl font-bold mb-2">Заявку прийнято</h3>
         <p className="opacity-80">
@@ -62,7 +62,7 @@ export default function LeadForm({ defaultService = "", source = "", variant = "
 
   const inputCls = `w-full px-4 py-3 rounded-sm border outline-none transition-colors ${
     dark
-      ? "bg-foreground/5 border-foreground/20 text-background placeholder:text-background/50 focus:border-accent"
+      ? "panel-ink-input focus:border-accent"
       : "bg-card border-border text-foreground placeholder:text-muted-foreground focus:border-accent"
   }`;
 
