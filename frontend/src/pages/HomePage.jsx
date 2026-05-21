@@ -9,17 +9,16 @@ import LeadForm from "../components/LeadForm";
 import KineticText from "../components/KineticText";
 import MagneticButton from "../components/MagneticButton";
 import { FadeIn, StaggerGrid, StaggerItem, Section, Eyebrow } from "../components/Motion";
-import { SERVICES, FLEET, REVIEWS, FAQS, POSTS, GALLERY, SITE, TRUST_TAGS } from "../lib/site-data";
+import { SERVICES, FLEET, REVIEWS, FAQS, POSTS, GALLERY, SITE, TRUST_TAGS, PRICING, PROCESS_STEPS } from "../lib/site-data";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../components/ui/accordion";
 import { useSeo, localBusinessSchema, faqPageSchema } from "../lib/seo";
-import PoltavaLandmarks from "../components/PoltavaLandmarks";
 import GoogleReviewsSection from "../components/GoogleReviewsSection";
 import DrivingTruck from "../components/DrivingTruck";
 
 export default function HomePage() {
   useSeo({
-    title: "Вантажні перевезення в Полтаві — переїзди 24/7",
-    description: "ВАШ ПЕРЕЇЗД — професійні вантажні перевезення в Полтаві: квартирні та офісні переїзди, послуги вантажників, міжмісто, перевезення піаніно. Цілодобово.",
+title: "Вантажне таксі Полтава — переїзди від 1800 грн",
+description: "Квартирні та офісні переїзди в Полтаві під ключ. Вантажне таксі, вивіз сміття. Власне авто, досвідчені вантажники. 4.9★ Google. Дзвоніть: 095 558-24-24",
     path: "/",
     schema: [localBusinessSchema, faqPageSchema(FAQS.slice(0, 6))],
   });
@@ -28,13 +27,16 @@ export default function HomePage() {
     <>
       <Header />
       <main className="pt-16 md:pt-20">
-        {/* Hero */}
+
+        {/* ============ HERO ============ */}
         <section className="relative overflow-hidden panel-ink">
           <div
-            className="absolute inset-0 bg-cover bg-center opacity-55"
-            style={{ backgroundImage: "url(https://images.unsplash.com/photo-1628481103102-01de5ffe556b?auto=format&fit=crop&w=1900&q=80)" }}
+            className="absolute inset-0 bg-cover bg-center opacity-35"
+            style={{ backgroundImage: "url(https://images.unsplash.com/photo-1605256585681-455837661b18?auto=format&fit=crop&w=1900&q=80)" }}
           />
-          <div className="absolute inset-0 hero-overlay" />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(105deg, rgba(8,12,22,0.94) 0%, rgba(8,12,22,0.82) 50%, rgba(8,12,22,0.6) 100%)" }} />
+          <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 80% 30%, rgba(234,88,12,0.10), transparent 55%)" }} />
+
           <div className="relative max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-24 md:py-32 lg:py-40">
             <div className="max-w-3xl">
               <motion.div
@@ -42,20 +44,22 @@ export default function HomePage() {
                 transition={{ duration: 0.6 }}
                 className="inline-flex items-center gap-2 mb-6 text-xs uppercase tracking-[0.25em] text-accent font-semibold"
               >
-                <Sparkles className="w-3.5 h-3.5" />
-                {SITE.city} · 5+ років · цілодобово
+                Полтава · 10 років досвіду · 8:00–22:00
               </motion.div>
+
               <h1 className="font-display font-extrabold text-5xl sm:text-6xl lg:text-[5.5rem] tracking-tight leading-[0.95]">
-                <KineticText text="Переїзд" />
-                <span className="font-serif italic text-accent ml-2">— це</span><br />
-                <KineticText text="просто." delay={0.2} />
+                <KineticText text="Квартирні" />
+                <span className="font-serif italic text-accent ml-2">переїзди та</span><br />
+                <KineticText text="вантажне таксі" delay={0.2} /><br className="hidden sm:block" />
+                <span className="font-serif italic text-accent">у Полтаві</span>
               </h1>
+
               <motion.p
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.5 }}
-                className="mt-7 text-lg md:text-xl opacity-85 max-w-xl"
+                className="mt-7 text-lg md:text-xl opacity-85 max-w-xl leading-relaxed"
               >
-                Безпечне і дбайливе перевезення вантажів по Полтаві, області та всій Україні. Команда, авто, пакування та страхування — все вже включено.
+                Подаємо власне авто з постійною командою професійних вантажників. 100% матеріальна відповідальність за кожну річ. Без прихованих доплат!
               </motion.p>
 
               <motion.div
@@ -63,28 +67,28 @@ export default function HomePage() {
                 transition={{ duration: 0.7, delay: 0.7 }}
                 className="mt-10 flex flex-wrap gap-3"
               >
-                <MagneticButton as="a" href={SITE.phoneHref} data-testid="hero-call-btn"
+                <MagneticButton as="a" href={SITE?.phoneHref || "tel:+380955582424"} data-testid="hero-call-btn"
                   className="inline-flex items-center gap-3 bg-accent hover:bg-accent/90 text-accent-foreground px-7 py-4 rounded-sm font-bold text-base transition-colors">
-                  <Phone className="w-5 h-5" /> {SITE.phone}
+                  <Phone className="w-5 h-5" /> {SITE?.phone || "+38 (095) 558-24-24"}
                 </MagneticButton>
-                <Link to="/services" data-testid="hero-services-btn"
+                <a href="#contact-form" data-testid="hero-services-btn"
                   className="inline-flex items-center gap-2 bg-background/10 hover:bg-background/20 backdrop-blur border border-background/20 px-7 py-4 rounded-sm font-semibold transition-all">
-                  Дізнатись більше <ArrowRight className="w-4 h-4" />
-                </Link>
+                  Отримати точний прорахунок <ArrowRight className="w-4 h-4" />
+                </a>
               </motion.div>
 
               <motion.div
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }}
-                className="mt-14 grid grid-cols-3 gap-4 md:gap-8 max-w-xl"
+                className="mt-14 grid grid-cols-3 gap-4 md:gap-8 max-w-xl border-t border-white/15 pt-8"
               >
                 {[
-                  { v: "до 2 т", l: "Вантажопідйомність" },
-                  { v: "до 20 м³", l: "Обʼєм авто" },
-                  { v: "5+ років", l: "Досвід команди" },
+                  { v: "10 років", l: "На ринку Полтави" },
+                  { v: "4.9 ★", l: "60 відгуків Google" },
+                  { v: "100%", l: "Матеріальна відповідальність" },
                 ].map((s) => (
                   <div key={s.l}>
                     <div className="font-display text-2xl md:text-3xl font-bold text-accent">{s.v}</div>
-                    <div className="text-xs md:text-sm opacity-70 uppercase tracking-wider mt-1">{s.l}</div>
+                    <div className="text-[0.65rem] md:text-xs opacity-70 uppercase tracking-wider mt-1.5">{s.l}</div>
                   </div>
                 ))}
               </motion.div>
@@ -92,17 +96,58 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Trust strip */}
+        {/* ============ TRUST STRIP ============ */}
         <div className="border-y border-border bg-surface py-5 overflow-hidden">
           <div className="flex animate-marquee whitespace-nowrap gap-12 text-muted-foreground text-sm font-medium">
-            {[...Array(2)].flatMap((_, i) => TRUST_TAGS.map((t, j) => (
-              <span key={`${i}-${j}`} className="inline-flex items-center gap-2"><span className="w-1.5 h-1.5 bg-accent rounded-full" />{t}</span>
+            {[...Array(2)].flatMap((_, i) => TRUST_TAGS?.map((t, j) => (
+              <span key={`${i}-${j}`} className="inline-flex items-center gap-2">
+                <span className="w-1.5 h-1.5 bg-accent rounded-full" />{t}
+              </span>
             )))}
           </div>
         </div>
 
-        {/* Services */}
-        <Section id="services">
+        {/* ============ PRICING ============ */}
+        {PRICING && (
+          <Section id="pricing" className="bg-background">
+            <div className="flex flex-col gap-3 mb-10">
+              <FadeIn>
+                <Eyebrow>Тарифи</Eyebrow>
+                <h2 className="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight text-foreground">
+                  Прозорі ціни <span className="font-serif italic text-accent">без</span> сюрпризів
+                </h2>
+              </FadeIn>
+              <FadeIn delay={0.1}>
+                <p className="max-w-md text-muted-foreground">
+                  Стартові тарифи на популярні послуги. Фінальна вартість — після короткої розмови.
+                </p>
+              </FadeIn>
+            </div>
+
+            <StaggerGrid className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border border border-border">
+              {PRICING.map((p, i) => (
+                <StaggerItem key={i}>
+                  <div className="group relative bg-card hover:bg-surface transition-colors duration-300 p-8 flex flex-col h-full">
+                    <div className="flex items-start justify-between mb-8">
+                      <div className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground font-semibold">{p.label}</div>
+                    </div>
+                    <div className="font-display font-extrabold leading-tight tracking-tight text-foreground" style={{ fontSize: "clamp(1.5rem,3.2vw,2.2rem)" }}>
+                      {p.price === "Індивідуально"
+                        ? "Індивідуально"
+                        : <> <span className="text-accent" dangerouslySetInnerHTML={{ __html: p.price }} /></>}
+                    </div>
+                    <div className="font-display text-sm font-semibold text-muted-foreground mt-1.5">{p.unit}</div>
+                    <p className="mt-6 text-sm text-muted-foreground leading-relaxed border-t border-border pt-5 flex-1">{p.note}</p>
+                    <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent group-hover:w-full transition-all duration-500 ease-out" />
+                  </div>
+                </StaggerItem>
+              ))}
+            </StaggerGrid>
+          </Section>
+        )}
+
+        {/* ============ SERVICES ============ */}
+        <Section id="services" className="bg-surface border-y border-border">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <FadeIn>
               <Eyebrow>Послуги</Eyebrow>
@@ -112,7 +157,7 @@ export default function HomePage() {
             </FadeIn>
             <FadeIn delay={0.1}>
               <p className="max-w-md text-muted-foreground">
-                Восьмеро основних напрямків. Натисніть на будь-яку послугу — побачите деталі, що включено, як працюємо.
+                Оберіть послугу — побачите що входить у вартість і як ми працюємо.
               </p>
             </FadeIn>
           </div>
@@ -131,7 +176,7 @@ export default function HomePage() {
                       <Icon className="w-6 h-6 text-foreground group-hover:text-accent-foreground transition-colors" />
                     </div>
                     <h3 className="font-display font-bold text-lg leading-tight tracking-tight">{s.title}</h3>
-                    <p className="mt-2 text-sm opacity-75 leading-relaxed">{s.short}</p>
+                    <p className="mt-2 text-sm opacity-75 leading-relaxed" dangerouslySetInnerHTML={{ __html: s.short }} />
                     <div className="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold text-accent">
                       Детальніше <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
                     </div>
@@ -142,19 +187,16 @@ export default function HomePage() {
           </StaggerGrid>
         </Section>
 
-        {/* Process */}
-        <Section className="bg-surface border-y border-border">
+        {/* ============ PROCESS ============ */}
+        <Section>
           <FadeIn>
             <Eyebrow>Як ми працюємо</Eyebrow>
-            <h2 className="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight mb-10 text-foreground">Чотири кроки до спокійного переїзду</h2>
+            <h2 className="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight mb-10 text-foreground">
+              Чотири кроки до спокійного переїзду
+            </h2>
           </FadeIn>
           <StaggerGrid className="grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-border border border-border">
-            {[
-              { n: "01", t: "Заявка", d: "Ви телефонуєте або залишаєте заявку. Розповідаєте про задачу — ми слухаємо, а не продаємо." },
-              { n: "02", t: "Прорахунок", d: "Ми називаємо чесну вартість, узгоджуємо час, авто і кількість людей. Жодних прихованих доплат." },
-              { n: "03", t: "Виконання", d: "Команда приїжджає вчасно, із пакувальними матеріалами та інструментами. Ви можете спокійно займатись своїми справами." },
-              { n: "04", t: "Передача", d: "Все на новому місці, ви перевіряєте, ми отримуємо оплату. Жодних додаткових запитів після." },
-            ].map((s) => (
+            {PROCESS_STEPS.map((s) => (
               <StaggerItem key={s.n}>
                 <div className="bg-card p-7 h-full">
                   <div className="font-display text-3xl font-bold text-accent mb-3">{s.n}</div>
@@ -166,12 +208,14 @@ export default function HomePage() {
           </StaggerGrid>
         </Section>
 
-        {/* Fleet */}
-        <Section>
+        {/* ============ FLEET ============ */}
+        <Section className="bg-surface border-y border-border">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <FadeIn>
               <Eyebrow>Автопарк</Eyebrow>
-              <h2 className="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight text-foreground">Свої авто, готові до роботи</h2>
+              <h2 className="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight text-foreground">
+                Власні авто — завжди готові до виїзду
+              </h2>
             </FadeIn>
             <FadeIn delay={0.1}>
               <Link to="/fleet" className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:opacity-80 link-underline">
@@ -182,8 +226,8 @@ export default function HomePage() {
           <StaggerGrid className="grid md:grid-cols-3 gap-6">
             {FLEET.map((c) => (
               <StaggerItem key={c.slug}>
-                <div data-testid={`fleet-${c.slug}`} className="border border-border bg-surface p-6 h-full hover:border-foreground transition-colors">
-                  <img src={c.img} alt={`Фургон ${c.name} — ${c.volume}, ${c.capacity}`} className="w-full h-32 object-contain mb-4" />
+                <div data-testid={`fleet-${c.slug}`} className="border border-border bg-card p-6 h-full hover:border-foreground transition-colors">
+                  <img src={c.img} alt={`Фургон ${c.name}`} className="w-full h-32 object-contain mb-4" />
                   <h3 className="font-display text-2xl font-bold tracking-tight text-foreground">{c.name}</h3>
                   <div className="mt-3 grid grid-cols-2 gap-2 text-sm">
                     <div><span className="text-muted-foreground">Довжина: </span>{c.length}</div>
@@ -198,8 +242,8 @@ export default function HomePage() {
           </StaggerGrid>
         </Section>
 
-        {/* Why us */}
-        <Section className="bg-surface border-y border-border">
+        {/* ============ WHY US ============ */}
+        <Section>
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <FadeIn>
               <Eyebrow>Чому ми</Eyebrow>
@@ -207,14 +251,14 @@ export default function HomePage() {
                 Команда, що <span className="font-serif italic text-accent">відповідає</span> за результат
               </h2>
               <p className="text-muted-foreground text-lg leading-relaxed">
-                Понад 5 років професійних перевезень. Ми — це не випадкові люди з оголошення, а команда, яка щодня працює разом. Власні авто, інструменти, пакувальні матеріали і чіткі стандарти.
+                Понад 10 років досвіду у сфері вантажних перевезень у Полтаві. Ми працюємо постійним штатом кваліфікованих працівників та маємо власний автопарк. Гарантуємо дбайливе ставлення до вашого майна та несемо повну матеріальну відповідальність за результати нашої роботи.
               </p>
               <div className="grid sm:grid-cols-2 gap-4 mt-8">
                 {[
-                  { icon: ShieldCheck, t: "Договір та страхування", d: "Працюємо офіційно з фіз. та юр. особами" },
-                  { icon: Clock, t: "Цілодобово", d: "Виїзд за 1–2 години у будні" },
-                  { icon: Truck, t: "Свій автопарк", d: "Авто під ваш обʼєм — без посередників" },
-                  { icon: Star, t: "Досвідчена команда", d: "Хлопці, що знають, що роблять" },
+                  { icon: ShieldCheck, t: "100% матеріальна відповідальність", d: "Несемо повну відповідальність за збереження вашого майна в процесі перевезення." },
+                  { icon: Clock, t: "Оперативна подача авто", d: "Подаємо транспорт по Полтаві протягом 1-2 годин. Приймаємо та виконуємо замовлення щодня з 08:00 до 22:00." },
+                  { icon: Truck, t: "Власний автопарк", d: "Підберемо оптимальний транспорт под ваш об'єм речей. Ви не переплачуєте за порожнє місце." },
+                  { icon: Star, t: "Професійна команда", d: "Наші вантажники — це постійний штат спеціалістів, які щодня працюють разом, мають необхідний досвід та спеціалізований інструмент." },
                 ].map((b) => {
                   const I = b.icon;
                   return (
@@ -235,7 +279,7 @@ export default function HomePage() {
               <div className="grid grid-cols-2 gap-3">
                 {GALLERY.slice(0, 4).map((g, i) => (
                   <div key={i} className={`img-zoom ${i === 0 ? "row-span-2" : ""}`}>
-                    <img src={g} alt="Робота команди ВАШ ПЕРЕЇЗД у Полтаві" className={`w-full object-cover rounded-sm ${i === 0 ? "h-full" : "h-44"}`} />
+                    <img src={g} alt="Команда ВашПереїзд за роботою" className={`w-full object-cover rounded-sm ${i === 0 ? "h-full" : "h-44"}`} />
                   </div>
                 ))}
               </div>
@@ -243,31 +287,31 @@ export default function HomePage() {
           </div>
         </Section>
 
-        {/* Reviews — Google styled */}
+        {/* ============ REVIEWS ============ */}
         <GoogleReviewsSection />
 
-        {/* Poltava landmarks */}
-        <PoltavaLandmarks />
-
-        {/* Driving truck separator */}
         <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
           <DrivingTruck className="my-4" />
         </div>
 
-        {/* FAQ */}
+        {/* ============ FAQ ============ */}
         <Section className="bg-surface border-y border-border">
           <div className="grid lg:grid-cols-3 gap-12">
             <FadeIn>
               <Eyebrow>Часті питання</Eyebrow>
-              <h2 className="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight text-foreground">Відповіді на головне</h2>
-              <p className="mt-4 text-muted-foreground">Не знайшли відповіді? Просто зателефонуйте — швидше і простіше.</p>
-              <a href={SITE.phoneHref} className="inline-flex items-center gap-2 mt-6 text-accent hover:opacity-80 font-bold">
-                <Phone className="w-4 h-4" /> {SITE.phone}
+              <h2 className="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight text-foreground">
+                Відповіді на головне
+              </h2>
+              <p className="mt-4 text-muted-foreground">
+                Не знайшли відповіді? Просто зателефонуйте — швидше і простіше.
+              </p>
+              <a href={SITE?.phoneHref || "tel:+380955582424"} className="inline-flex items-center gap-2 mt-6 text-accent hover:opacity-80 font-bold">
+                <Phone className="w-4 h-4" /> {SITE?.phone || "+38 (095) 558-24-24"}
               </a>
             </FadeIn>
             <FadeIn delay={0.1} className="lg:col-span-2">
               <Accordion type="single" collapsible className="border-t border-border">
-                {FAQS.slice(0, 6).map((f, i) => (
+                {FAQS.slice(0, 8).map((f, i) => (
                   <AccordionItem key={i} value={`item-${i}`} className="border-b border-border" data-testid={`faq-${i}`}>
                     <AccordionTrigger className="text-left font-display font-semibold text-base md:text-lg py-5 hover:text-accent">
                       {f.q}
@@ -282,12 +326,14 @@ export default function HomePage() {
           </div>
         </Section>
 
-        {/* Blog preview */}
+        {/* ============ BLOG ============ */}
         <Section>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <FadeIn>
               <Eyebrow>Блог</Eyebrow>
-              <h2 className="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight text-foreground">Корисні статті про переїзди</h2>
+              <h2 className="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight text-foreground">
+                Корисні статті про переїзди
+              </h2>
             </FadeIn>
             <FadeIn delay={0.1}>
               <Link to="/blog" className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:opacity-80 link-underline">
@@ -296,13 +342,15 @@ export default function HomePage() {
             </FadeIn>
           </div>
           <StaggerGrid className="grid md:grid-cols-3 gap-6">
-            {POSTS.slice(0, 3).map((p) => (
+            {POSTS?.slice(0, 3).map((p) => (
               <StaggerItem key={p.slug}>
                 <Link to={`/blog/${p.slug}`} className="group block">
                   <div className="aspect-[16/10] img-zoom rounded-sm">
                     <img src={p.cover} alt={p.title} className="w-full h-full object-cover" />
                   </div>
-                  <div className="text-xs text-muted-foreground mt-4 uppercase tracking-wider">{new Date(p.date).toLocaleDateString("uk-UA", { year: "numeric", month: "long", day: "numeric" })}</div>
+                  <div className="text-xs text-muted-foreground mt-4 uppercase tracking-wider">
+                    {new Date(p.date).toLocaleDateString("uk-UA", { year: "numeric", month: "long", day: "numeric" })}
+                  </div>
                   <h3 className="font-display font-bold text-xl mt-2 leading-tight text-foreground group-hover:text-accent transition-colors">{p.title}</h3>
                   <p className="mt-2 text-muted-foreground text-sm">{p.excerpt}</p>
                 </Link>
@@ -311,21 +359,22 @@ export default function HomePage() {
           </StaggerGrid>
         </Section>
 
-        {/* Lead form CTA */}
-        <Section className="panel-ink">
+        {/* ============ LEAD FORM CTA ============ */}
+        <Section id="contact-form" className="panel-ink">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <FadeIn>
               <Eyebrow>Замовити</Eyebrow>
               <h2 className="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight mb-5">
-                Отримайте <span className="font-serif italic text-accent">індивідуальний</span> прорахунок
+                Отримайте <span className="font-serif italic text-accent">точний</span> прорахунок
               </h2>
               <p className="opacity-80 text-lg leading-relaxed">
-                Залишайте заявку — менеджер зателефонує протягом 10 хвилин, уточнить деталі та запропонує оптимальне авто й команду.
+                Залишайте заявку — менеджер зателефонує протягом 10 хвилин,
+                уточнить деталі та назве точну вартість.
               </p>
               <div className="mt-8 grid gap-3 text-sm opacity-90">
-                <div className="flex items-center gap-3"><span className="text-accent">✓</span> Безкоштовна консультація</div>
-                <div className="flex items-center gap-3"><span className="text-accent">✓</span> Чесна ціна після огляду</div>
-                <div className="flex items-center gap-3"><span className="text-accent">✓</span> Без прихованих платежів</div>
+                <div className="flex items-center gap-3"><span className="text-accent">✓</span> Фіксована ціна без доплат на місці</div>
+                <div className="flex items-center gap-3"><span className="text-accent">✓</span> Приїжджаємо зі своїм інструментом і матеріалами</div>
+                <div className="flex items-center gap-3"><span className="text-accent">✓</span> 100% відшкодування якщо щось пошкодимо</div>
               </div>
             </FadeIn>
             <FadeIn delay={0.1}>
@@ -333,6 +382,7 @@ export default function HomePage() {
             </FadeIn>
           </div>
         </Section>
+
       </main>
       <Footer />
       <MobileStickyCTA />
